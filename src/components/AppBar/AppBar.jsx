@@ -5,8 +5,6 @@ import styles from './AppBar.module.css';
 import { getIsAuthenticated } from '../../redux/auth/auth-selectors';
 import { useSelector } from 'react-redux';
 
-
-
 export default function AppBar () {
   const isAuthenticated = useSelector(getIsAuthenticated);
 
@@ -16,7 +14,7 @@ export default function AppBar () {
       {isAuthenticated ? <UserMenu /> : <AuthNav />}
     </header>
   );
-};
+}
 
 //  const AppBar = ({ isAuthenticated }) => {
 

@@ -12,10 +12,8 @@ export default function ContactList () {
 
   const deletedContactbyId = useCallback(event => dispatch(deletedContact(event.currentTarget.id)), [dispatch]);
  
-  useEffect(()=> {
-    const fetchedContacts = () => dispatch(fetchContacts());
-    
-    dispatch(fetchedContacts())
+  useEffect(()=> { 
+    dispatch(fetchContacts())
   }, [dispatch]);
 
   return (
