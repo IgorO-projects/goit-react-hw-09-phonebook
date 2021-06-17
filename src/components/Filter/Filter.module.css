@@ -1,0 +1,10 @@
+.input {
+    width: 320px;
+    outline: none;
+
+}
+.input:hover,
+.input:focus {
+    border-color: palevioletred;
+    border-radius: 2px;
+}
