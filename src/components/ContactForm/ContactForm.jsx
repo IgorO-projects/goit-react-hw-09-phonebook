@@ -1,25 +1,27 @@
 import { useState } from 'react';
 import styles from './ContactForm.module.css';
 import { handleContactAdd, } from '../../redux/actions/phonebook-operations';
-import { useDispatch } from 'react-redux';
+import { getAllContacts } from '../../redux/actions/phonebook-selectors';
+import { useDispatch, useSelector } from 'react-redux';
 // import { connect } from 'react-redux';
 // import { Component } from 'react';
 
 
-export default function ContactForm ({ contacts }) {
-  const [nameContact, setNameContact] = useState('');
-  const [numberContact, setNumberContact] =useState('');
+export default function ContactForm () {
+  const contacts = useSelector(getAllContacts);
+  const [name, setName] = useState('');
+  const [number, setNumber] =useState('');
 
   const handleChange = event => {
-    const { name, value } =event.target;
+    const { name, value } = event.target;
 
     switch(name) {
       case 'name':
-      setNameContact(value);
+      setName(value);
       break;
     
     case 'number':
-      setNumberContact(value);  
+      setNumber(value);  
       break
 
     default: console.warn(`there is no type of ${name}`);
@@ -36,10 +38,8 @@ export default function ContactForm ({ contacts }) {
   const onSubmit = event => {
     event.preventDefault();
 
-    // const { handlePhoneAdd, contacts } = this.props;
-    const contact = { nameContact, numberContact };
-
-    if(nameCheked(contacts.items, nameContact)) {
+    const contact = { name, number };
+    if(nameCheked(contacts, name)) {
         alert(`${name} is already in Phonebook`)
         return;
       }   
@@ -59,7 +59,7 @@ export default function ContactForm ({ contacts }) {
         title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
         placeholder="Name"
         required
-        value={nameContact}
+        value={name}
         onChange={handleChange}
         />
       </label>
@@ -74,7 +74,7 @@ export default function ContactForm ({ contacts }) {
         title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
         placeholder="Number"
         required
-        value={numberContact}
+        value={number}
         onChange={handleChange}
         />
       </label>
